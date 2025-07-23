@@ -2,15 +2,15 @@ import streamlit as st
 from switcher import OBSSceneSwitcher
 
 # 页面配置
-st.set_page_config(page_title="TPL场景切换器", page_icon="🎮", layout="wide")
+st.set_page_config(page_title="TPL场景切换器", layout="wide")
 
 # 标题
-st.title("🎮 TPL场景切换器")
+st.title("TPL场景切换器")
 st.markdown("---")
 
 # 侧边栏配置
 with st.sidebar:
-    st.header("🔧 连接配置")
+    st.header("连接配置")
 
     # OBS连接配置
     st.subheader("OBS WebSocket配置")
@@ -24,7 +24,7 @@ with st.sidebar:
     baud_rate = st.number_input("波特率", value=115200)
 
     # 连接按钮
-    if st.button("🔌 连接OBS", type="primary"):
+    if st.button("连接OBS", type="primary"):
         try:
             switcher = OBSSceneSwitcher(
                 host=host, port=port, password=password, com=com_port, baud=baud_rate
@@ -42,12 +42,10 @@ if "switcher" not in st.session_state:
 switcher = st.session_state.switcher
 
 # 场景切换选项
-st.header("🎬 场景切换")
+st.header("场景切换")
 
 # 创建选项卡
-tab1, tab2, tab3, tab4 = st.tabs(
-    ["🖥️ 现场摄像", "👤 个人赛", "🎯 DP团队赛", "⚔️ SP团队赛"]
-)
+tab1, tab2, tab3, tab4 = st.tabs(["现场摄像", "个人赛", "DP团队赛", "SP团队赛"])
 
 with tab1:
     st.subheader("现场摄像")
@@ -178,23 +176,3 @@ with tab4:
             st.success("✅ 已切换到SP团队赛")
         except Exception as e:
             st.error(f"❌ 切换失败: {e}")
-
-# 底部信息
-st.markdown("---")
-st.markdown("### 📋 使用说明")
-st.markdown(
-    """
-1. **连接配置**: 在侧边栏配置OBS WebSocket连接参数和串口设置
-2. **场景切换**: 选择对应的选项卡进行场景配置和切换
-3. **DP团队赛**: 配置队伍信息、比分、机台和顶部文字
-4. **SP团队赛**: 额外需要配置选手位置（1P/2P）
-"""
-)
-
-# 状态显示
-if st.sidebar.button("📊 显示连接状态"):
-    try:
-        # 这里可以添加获取OBS状态的代码
-        st.sidebar.success("✅ OBS连接正常")
-    except Exception as e:
-        st.sidebar.error(f"❌ OBS连接异常: {e}")
