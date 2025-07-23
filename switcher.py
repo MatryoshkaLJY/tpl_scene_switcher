@@ -62,13 +62,13 @@ class OBSSceneSwitcher:
 
     def set_text_team(self, team1_name, team2_name, player1_name, player2_name, team1_score, team2_score, top_text):
         text_sources = {
-            "LSCORE": f"{team1_score}",
-            "RSCORE": f"{team2_score}",
-            "TOPTEXT": top_text,
-            "LTEAM": team1_name,
-            "RTEAM": team2_name,
-            "LPLAYER": player1_name,
-            "RPLAYER": player2_name
+            "LSCORE": f"{team1_score}\n    ",
+            "RSCORE": f"{team2_score}\n    ",
+            "TOPTEXT": top_text + "\n       ",
+            "LTEAM": team1_name + "\n       ",
+            "RTEAM": team2_name + "\n       ",
+            "LPLAYER": player1_name + "\n       ",
+            "RPLAYER": player2_name + "\n       "
         }
         for source_name, text_content in text_sources.items():
             try:
